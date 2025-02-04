@@ -59,7 +59,7 @@ class Ssh{
   }
 
   Future<SSHSession> sendKml(String kmlContent, String name, String desc
-      // ,LookAt flyto
+      ,LookAt flyto
       ) async {
 
     final sftp = await _client!.sftp();
@@ -74,9 +74,9 @@ class Ssh{
 
     file.writeBytes(bytes);
 
-    final execResult = await _client!.execute('echo "$_url/dummy.kml" > /var/www/html/kmls.txt');
+    await _client!.execute('echo "$_url/dummy.kml" > /var/www/html/kmls.txt');
 
-    // final execResult = await _client!.execute('echo "flytoview=${flyto.generateLinearString()})}" > /tmp/query.txt');
+    final execResult = await _client!.execute('echo "flytoview=${flyto.generateLinearString()})}" > /tmp/query.txt');
 
     return execResult;
   }
